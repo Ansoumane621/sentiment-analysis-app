@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Tableau de bord - Sentiment Analyzer{% endblock %}
+{% block title %}Dashboard - Sentiment Analyzer{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -11,18 +11,18 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h1 class="display-6 fw-bold">
-                            <i class="fas fa-chart-line me-3"></i>Bonjour, {{ user.username }} !
+                            <i class="fas fa-chart-line me-3"></i>Hello, {{ user.username }} !
                         </h1>
-                        <p class="lead mb-0">Bienvenue sur votre tableau de bord d'analyse de sentiments</p>
+                        <p class="lead mb-0">Welcome to your sentiment analysis dashboard</p>
                     </div>
                     <div>
                         {% if use_simulation %}
                         <span class="badge bg-info fs-6">
-                            <i class="fas fa-flask me-1"></i> Mode Simulation
+                            <i class="fas fa-flask me-1"></i> Simulation Mode
                         </span>
                         {% else %}
                         <span class="badge bg-success fs-6">
-                            <i class="fas fa-brain me-1"></i> Mode ML
+                            <i class="fas fa-brain me-1"></i> ML Mode
                         </span>
                         {% endif %}
                     </div>
@@ -39,7 +39,7 @@
                     <i class="fas fa-chart-simple fa-2x text-primary"></i>
                 </div>
                 <h3 class="fw-bold mb-0">{{ total }}</h3>
-                <p class="text-muted small">Analyses totales</p>
+                <p class="text-muted small">Total Analyses</p>
             </div>
         </div>
         <div class="col-md-3">
@@ -48,7 +48,7 @@
                     <i class="fas fa-smile-wink fa-2x text-success"></i>
                 </div>
                 <h3 class="fw-bold mb-0 text-success">{{ positive }}</h3>
-                <p class="text-muted small">Sentiments positifs</p>
+                <p class="text-muted small">Positive Sentiments</p>
             </div>
         </div>
         <div class="col-md-3">
@@ -57,7 +57,7 @@
                     <i class="fas fa-frown fa-2x text-danger"></i>
                 </div>
                 <h3 class="fw-bold mb-0 text-danger">{{ negative }}</h3>
-                <p class="text-muted small">Sentiments négatifs</p>
+                <p class="text-muted small">Negative Sentiments</p>
             </div>
         </div>
         <div class="col-md-3">
@@ -66,7 +66,7 @@
                     <i class="fas fa-meh fa-2x text-secondary"></i>
                 </div>
                 <h3 class="fw-bold mb-0 text-secondary">{{ neutral }}</h3>
-                <p class="text-muted small">Sentiments neutres</p>
+                <p class="text-muted small">Neutral Sentiments</p>
             </div>
         </div>
     </div>
@@ -78,10 +78,10 @@
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold mb-0">
-                            <i class="fas fa-history me-2 text-primary"></i>Dernières analyses
+                            <i class="fas fa-history me-2 text-primary"></i>Latest Analyses
                         </h5>
                         <a href="{{ url_for('history') }}" class="btn btn-sm btn-outline-primary">
-                            Voir tout <i class="fas fa-arrow-right ms-1"></i>
+                            View All <i class="fas fa-arrow-right ms-1"></i>
                         </a>
                     </div>
                     
@@ -90,9 +90,9 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Texte</th>
+                                        <th>Text</th>
                                         <th>Sentiment</th>
-                                        <th>Confiance</th>
+                                        <th>Confidence</th>
                                         <th>Date</th>
                                     </tr>
                                 </thead>
@@ -102,9 +102,9 @@
                                         <td class="text-truncate" style="max-width: 300px;">{{ pred.text[:80] }}{% if pred.text|length > 80 %}...{% endif %}</td>
                                         <td>
                                             <span class="badge {% if pred.sentiment == 'positif' %}bg-success{% elif pred.sentiment == 'negatif' %}bg-danger{% else %}bg-secondary{% endif %}">
-                                                {% if pred.sentiment == 'positif' %}👍 Positif
-                                                {% elif pred.sentiment == 'negatif' %}👎 Négatif
-                                                {% else %}😐 Neutre{% endif %}
+                                                {% if pred.sentiment == 'positif' %}👍 Positive
+                                                {% elif pred.sentiment == 'negatif' %}👎 Negative
+                                                {% else %}😐 Neutral{% endif %}
                                             </span>
                                         </td>
                                         <td>{{ "%.1f"|format(pred.confidence * 100) }}%</td>
@@ -117,9 +117,9 @@
                     {% else %}
                         <div class="text-center py-5">
                             <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
-                            <p class="text-muted">Aucune analyse effectuée pour le moment</p>
+                            <p class="text-muted">No analysis performed yet</p>
                             <a href="{{ url_for('predict') }}" class="btn btn-primary">
-                                <i class="fas fa-plus me-2"></i>Commencer une analyse
+                                <i class="fas fa-plus me-2"></i>Start an Analysis
                             </a>
                         </div>
                     {% endif %}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Connexion - ML Predictor{% endblock %}
+{% block title %}Login - ML Predictor{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -9,35 +9,35 @@
             <div class="card shadow-lg border-0 rounded-4">
                 <div class="card-header bg-white border-0 text-center pt-4">
                     <i class="fas fa-robot fa-3x text-primary mb-3"></i>
-                    <h3 class="fw-bold">Bienvenue</h3>
-                    <p class="text-muted">Connectez-vous pour accéder à l'application</p>
+                    <h3 class="fw-bold">Welcome</h3>
+                    <p class="text-muted">Log in to access the application</p>
                 </div>
                 <div class="card-body p-4">
                     <form method="POST">
                         <div class="mb-3">
                             <label class="form-label fw-semibold">
-                                <i class="fas fa-user me-2 text-primary"></i>Nom d'utilisateur
+                                <i class="fas fa-user me-2 text-primary"></i>Username
                             </label>
                             <input type="text" name="username" class="form-control form-control-lg rounded-3" 
                                    placeholder="ex: johndoe" required>
                         </div>
                         <div class="mb-4">
                             <label class="form-label fw-semibold">
-                                <i class="fas fa-lock me-2 text-primary"></i>Mot de passe
+                                <i class="fas fa-lock me-2 text-primary"></i>Password
                             </label>
                             <input type="password" name="password" class="form-control form-control-lg rounded-3" 
                                    placeholder="••••••••" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 rounded-3">
-                            <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                            <i class="fas fa-sign-in-alt me-2"></i>Log in
                         </button>
                     </form>
                 </div>
                 <div class="card-footer bg-white border-0 text-center pb-4">
-                    <p class="mb-0">Pas encore de compte ? 
-                        <a href="{{ url_for('register') }}" class="text-primary fw-semibold">S'inscrire</a>
+                    <p class="mb-0">Don't have an account yet? 
+                        <a href="{{ url_for('register') }}" class="text-primary fw-semibold">Sign up</a>
                     </p>
-                    <small class="text-muted">Compte test : test / test123</small>
+                    <small class="text-muted">Test account: test / test123</small>
                 </div>
             </div>
         </div>

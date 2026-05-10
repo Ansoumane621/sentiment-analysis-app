@@ -14,7 +14,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
-login_manager.login_message = "Veuillez vous connecter pour accéder à l'application"
+login_manager.login_message = "Please log in to access the application"
 
 # ==================== CONFIGURATION MODE ====================
 # 🔧 Maintenant on utilise le VRAI modèle !
@@ -60,7 +60,7 @@ def load_model():
     global model_pipeline, vectorizer, classifier
     
     print("\n" + "=" * 50)
-    print("🔧 CHARGEMENT DU MODÈLE")
+    print("🔧 LOADING MODEL")
     print("=" * 50)
     
     # Option 1: Charger le pipeline complet (recommandé)
@@ -71,28 +71,28 @@ def load_model():
             if isinstance(model_data, dict):
                 vectorizer = model_data.get('vectorizer')
                 classifier = model_data.get('classifier')
-                print("✅ Modèle chargé depuis sentiment140_model.pkl (format dictionnaire)")
+                print("✅ Model loaded from sentiment140_model.pkl (dictionary format)")
             else:
                 # Si c'est un pipeline scikit-learn
                 model_pipeline = model_data
-                print("✅ Pipeline complet chargé depuis sentiment140_model.pkl")
+                print("✅ Full pipeline loaded from sentiment140_model.pkl")
             return True
         except Exception as e:
-            print(f"⚠️ Erreur chargement pipeline: {e}")
+            print(f"⚠️ Pipeline loading error: {e}")
     
     # Option 2: Charger vectorizer et classifier séparément
     if os.path.exists(VECTORIZER_PATH) and os.path.exists(MODEL_CLASSIFIER_PATH):
         try:
             vectorizer = joblib.load(VECTORIZER_PATH)
             classifier = joblib.load(MODEL_CLASSIFIER_PATH)
-            print("✅ Vectorizer et classifieur chargés séparément")
+            print("✅ Vectorizer and classifier loaded separately")
             return True
         except Exception as e:
-            print(f"⚠️ Erreur chargement séparé: {e}")
+            print(f"⚠️ Separate loading error: {e}")
     
-    print("❌ Aucun modèle trouvé !")
-    print("   Vérifiez que les fichiers sont dans le dossier 'model/'")
-    print("   Fichiers attendus:")
+    print("❌ No model found!")
+    print("   Check that the files are in the 'model/' folder")
+    print("   Expected files:")
     print("   - sentiment140_model.pkl")
     print("   - model_classifier.pkl + vectorizer.pkl")
     return False
@@ -128,7 +128,7 @@ def predict_sentiment(text):
             confidence = max(probabilities)
         else:
             # Fallback vers simulation si modèle non chargé
-            print("⚠️ Modèle non disponible, utilisation de la simulation")
+            print("⚠️ Model not available, using simulation")
             return simulate_sentiment_fallback(text)
         
         # S'assurer que le sentiment est dans le bon format
@@ -140,7 +140,7 @@ def predict_sentiment(text):
         return sentiment, confidence
         
     except Exception as e:
-        print(f"❌ Erreur lors de la prédiction: {e}")
+        print(f"❌ Prediction error: {e}")
         # Fallback sécurisé
         return 'neutre', 0.5
 
@@ -169,7 +169,7 @@ def simulate_sentiment_fallback(text):
 MODEL_LOADED = load_model()
 
 if not MODEL_LOADED:
-    print("\n⚠️ ATTENTION: Mode simulation activé par défaut")
+    print("\n⚠️ WARNING: Simulation mode activated by default")
     USE_SIMULATION = True
 
 # ==================== MODÈLE UTILISATEUR ====================
@@ -220,10 +220,10 @@ def login():
         
         if user and user.check_password(password):
             login_user(user)
-            flash(f'Bienvenue {username} !', 'success')
+            flash(f'Welcome {username}!', 'success')
             return redirect(url_for('dashboard'))
         else:
-            flash('Nom d\'utilisateur ou mot de passe incorrect', 'danger')
+            flash('Incorrect username or password', 'danger')
     
     return render_template('login.html')
 
@@ -239,19 +239,19 @@ def register():
         confirm = request.form.get('confirm_password')
         
         if password != confirm:
-            flash('Les mots de passe ne correspondent pas', 'danger')
+            flash('Passwords do not match', 'danger')
             return render_template('register.html')
         
         if User.query.filter_by(username=username).first():
-            flash('Ce nom d\'utilisateur existe déjà', 'danger')
+            flash('This username already exists', 'danger')
             return render_template('register.html')
         
         if User.query.filter_by(email=email).first():
-            flash('Cet email est déjà utilisé', 'danger')
+            flash('This email is already in use', 'danger')
             return render_template('register.html')
         
         if len(password) < 6:
-            flash('Le mot de passe doit contenir au moins 6 caractères', 'danger')
+            flash('Password must be at least 6 characters long', 'danger')
             return render_template('register.html')
         
         user = User(username=username, email=email)
@@ -259,7 +259,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         
-        flash('Inscription réussie ! Vous pouvez maintenant vous connecter', 'success')
+        flash('Registration successful! You can now log in', 'success')
         return redirect(url_for('login'))
     
     return render_template('register.html')
@@ -290,11 +290,11 @@ def predict():
         text = request.form.get('text', '').strip()
         
         if not text:
-            flash('Veuillez entrer un texte à analyser', 'warning')
+            flash('Please enter text to analyze', 'warning')
             return redirect(url_for('predict'))
         
         if len(text) < 3:
-            flash('Le texte est trop court (minimum 3 caractères)', 'warning')
+            flash('Text is too short (minimum 3 characters)', 'warning')
             return redirect(url_for('predict'))
         
         # 🌟 UTILISATION DU VRAI MODÈLE 🌟
@@ -339,7 +339,7 @@ def history():
 @login_required
 def logout():
     logout_user()
-    flash('Vous avez été déconnecté', 'info')
+    flash('You have been logged out', 'info')
     return redirect(url_for('login'))
 
 @app.route('/api/predict', methods=['POST'])
@@ -372,21 +372,21 @@ def init_db():
             test_user.set_password('test123')
             db.session.add(test_user)
             db.session.commit()
-            print("✅ Utilisateur de test créé: test / test123")
+            print("✅ Test user created: test / test123")
 
 if __name__ == '__main__':
     init_db()
     
     print("\n" + "=" * 60)
-    print("🚀 APPLICATION PRÊTE")
+    print("🚀 APPLICATION READY")
     print("=" * 60)
     if MODEL_LOADED:
-        print("✅ MODÈLE ML CHARGÉ (Sentiment140 - 1.6M tweets)")
-        print("📊 Type: Classification binaire (positif/négatif)")
+        print("✅ ML MODEL LOADED (Sentiment140 - 1.6M tweets)")
+        print("📊 Type: Binary classification (positive/negative)")
     else:
-        print("⚠️ Mode simulation actif (modèle non trouvé)")
-    print("\n🌐 Accédez à l'application : http://localhost:5000")
-    print("👤 Compte test: test / test123")
+        print("⚠️ Simulation mode active (model not found)")
+    print("\n🌐 Access the application: http://localhost:5000")
+    print("👤 Test account: test / test123")
     print("=" * 60)
     
     app.run(debug=True, host='0.0.0.0', port=5000)
