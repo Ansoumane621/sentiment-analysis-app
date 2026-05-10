@@ -1,0 +1,137 @@
+# ====================
+# Python / Flask
+# ====================
+
+# Environnement virtuel
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Fichiers Python compilés
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Fichiers de distribution
+dist/
+build/
+*.egg-info/
+*.egg
+MANIFEST
+
+# ====================
+# Base de données
+# ====================
+
+# SQLite (contient des données utilisateur)
+*.db
+*.sqlite
+*.sqlite3
+instance/
+*.db-journal
+
+# ====================
+# Fichiers de log
+# ====================
+
+*.log
+*.logs
+logs/
+*.pid
+*.seed
+
+# ====================
+# Variables d'environnement
+# ====================
+
+.env
+.env.local
+.env.production
+.flaskenv
+
+# ====================
+# IDE / Éditeurs
+# ====================
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# ====================
+# OS spécifique
+# ====================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+desktop.ini
+
+# Linux
+*.directory
+
+# ====================
+# Projet spécifique
+# ====================
+
+# Dossiers de données (conserve le dataset mais pas les versions nettoyées)
+data/raw/
+data/processed/
+*.tmp
+
+# Backup de modèles (gardez uniquement le modèle final)
+model/backup/
+model/*.backup
+
+# Fichiers de test temporaires
+test_*.py
+temp_*.py
+
+# Fichiers de rapport
+*.html.bak
+*.css.bak
+
+# Dossiers cachés
+.*.swp
+.*.swo
+
+# Fichiers Jupyter (si vous en avez)
+.ipynb_checkpoints/
+*.ipynb
+
+# ====================
+# Secrets et clés
+# ====================
+
+# Kaggle API
+kaggle.json
+.kaggle/
+
+# Clés privées
+*.pem
+*.key
+*.crt
