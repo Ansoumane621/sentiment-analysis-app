@@ -1,0 +1,265 @@
+/* body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+.login-body {
+    background: linear-gradient(135deg, #141e30, #243b55);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.login-card {
+    background: white;
+    width: 400px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px rgba(0,0,0,0.2);
+}
+
+.logo-text {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: gray;
+    margin-bottom: 30px;
+}
+
+.custom-input {
+    margin-bottom: 20px;
+    height: 50px;
+    border-radius: 12px;
+}
+
+.login-btn {
+    width: 100%;
+    background: #141e30;
+    color: white;
+    height: 50px;
+    border-radius: 12px;
+}
+
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background: #141e30;
+    color: white;
+    padding: 30px;
+}
+
+.sidebar-logo {
+    margin-bottom: 40px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.logout-btn {
+    color: white;
+    text-decoration: none;
+}
+
+.main-content {
+    flex: 1;
+    background: #f4f7fb;
+    padding: 40px;
+}
+
+.top-card,
+.prediction-card,
+.result-card,
+.history-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
+}
+
+.text-area {
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.predict-btn {
+    background: #141e30;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 12px;
+}
+
+.result-text {
+    font-size: 22px;
+    color: red;
+    font-weight: bold;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+}
+
+
+
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+.sidebar {
+    width: 260px;
+    background: #111827;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    color: white;
+    margin-bottom: 40px;
+}
+
+.nav-link {
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: #1e293b;
+    color: white;
+}
+
+.active-link {
+    background: #2563eb;
+    color: white;
+}
+
+.logout-link {
+    margin-top: auto;
+    color: #ef4444;
+    text-decoration: none;
+    padding: 14px 18px;
+}
+
+
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+}
+
+.card-box {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+} */
+
+
+
+/* Styles personnalisés */
+:root {
+    --primary: #4361ee;
+    --success: #06ffa5;
+    --danger: #ef233c;
+    --warning: #ffb703;
+    --dark: #2b2d42;
+    --light: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Cards avec effet hover */
+.hover-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.1) !important;
+}
+
+/* Gradient bg */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #7209b7 100%);
+}
+
+/* Boutons personnalisés */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #3a0ca3 100%);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(67, 97, 238, 0.3);
+}
+
+/* Form controls */
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
+}
+
+/* Animation pour le cercle de résultat */
+.result-circle {
+    transition: all 0.5s ease;
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .display-6 {
+        font-size: 1.5rem;
+    }
+    
+    .result-circle {
+        width: 140px !important;
+        height: 140px !important;
+    }
+}

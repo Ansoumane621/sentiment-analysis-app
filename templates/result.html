@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Résultat de l'analyse - ML Predictor{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-header bg-white border-0 text-center pt-4">
+                    <i class="fas fa-chart-pie fa-3x text-primary mb-3"></i>
+                    <h2 class="fw-bold">Résultat de l'analyse</h2>
+                    
+                    {% if use_simulation %}
+                    <div class="badge bg-info mt-2">
+                        <i class="fas fa-flask me-1"></i> Simulation
+                    </div>
+                    {% else %}
+                    <div class="badge bg-success mt-2">
+                        <i class="fas fa-brain me-1"></i> Modèle IA (Sentiment140 - 1.6M tweets)
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-body p-4">
+                    
+                    <!-- Résultat principal -->
+                    <div class="text-center mb-4">
+                        <div class="sentiment-circle d-inline-flex align-items-center justify-content-center rounded-circle" 
+                             style="width: 200px; height: 200px; background: {{ 'rgba(46, 204, 113, 0.1)' if sentiment == 'positif' else 'rgba(231, 76, 60, 0.1)' if sentiment == 'negatif' else 'rgba(149, 165, 166, 0.1)' }}">
+                            <div class="text-center">
+                                <i class="fas {{ icon }} fa-4x mb-2 text-{{ color }}"></i>
+                                <h1 class="display-5 fw-bold text-{{ color }} mb-0">
+                                    {% if sentiment == 'positif' %}
+                                        Positif 😊
+                                    {% elif sentiment == 'negatif' %}
+                                        Négatif 😞
+                                    {% else %}
+                                        Neutre 😐
+                                    {% endif %}
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Barre de confiance -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Confiance du modèle</span>
+                            <span class="fw-bold text-{{ color }}">{{ "%.1f"|format(confidence * 100) }}%</span>
+                        </div>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-{{ color }}" 
+                                 role="progressbar" 
+                                 style="width: {{ confidence * 100 }}%" 
+                                 aria-valuenow="{{ confidence * 100 }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100">
+                                {{ "%.1f"|format(confidence * 100) }}%
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Texte analysé -->
+                    <div class="card bg-light border-0 rounded-3 mb-4">
+                        <div class="card-body">
+                            <h6 class="fw-semibold mb-2">
+                                <i class="fas fa-quote-left me-2 text-primary"></i>Texte analysé :
+                            </h6>
+                            <p class="mb-0 fst-italic">"{{ text }}"</p>
+                            <small class="text-muted mt-2 d-block">
+                                <i class="fas fa-language me-1"></i> 
+                                {% if use_simulation %}Analyse basée sur dictionnaires (FR/EN){% else %}Analyse par modèle IA{% endif %}
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Interprétation -->
+                    <div class="alert {{ 'alert-success' if sentiment == 'positif' else 'alert-danger' if sentiment == 'negatif' else 'alert-secondary' }} rounded-3">
+                        <i class="fas {{ 'fa-smile-wink' if sentiment == 'positif' else 'fa-frown' if sentiment == 'negatif' else 'fa-meh' }} me-2"></i>
+                        {% if sentiment == 'positif' %}
+                            <strong>Sentiment positif détecté !</strong> Le texte exprime une opinion favorable, de la satisfaction ou de l'enthousiasme.
+                        {% elif sentiment == 'negatif' %}
+                            <strong>Sentiment négatif détecté !</strong> Le texte exprime une insatisfaction, une critique ou un avis défavorable.
+                        {% else %}
+                            <strong>Sentiment neutre détecté.</strong> Le texte est objectif, informatif ou n'exprime pas d'émotion forte.
+                        {% endif %}
+                    </div>
+
+                    {% if use_simulation %}
+                    <div class="alert alert-info rounded-3 small">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Mode simulation :</strong> L'analyse utilise des dictionnaires de mots positifs/négatifs 
+                        et des règles de détection (négations, intensificateurs). Pour une analyse par IA, 
+                        entraînez un vrai modèle avec <code>python train_model.py</code>.
+                    </div>
+                    {% endif %}
+
+                    <!-- Boutons d'action -->
+                    <div class="d-flex gap-2 justify-content-center mt-4">
+                        <a href="{{ url_for('predict') }}" class="btn btn-primary">
+                            <i class="fas fa-plus me-2"></i>Nouvelle analyse
+                        </a>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-chart-line me-2"></i>Voir historique
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .sentiment-circle {
+        transition: transform 0.3s ease;
+        margin: 0 auto;
+    }
+    .sentiment-circle:hover {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
