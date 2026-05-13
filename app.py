@@ -53,7 +53,6 @@ def clean_tweet(text):
     text = re.sub(r'\s+', ' ', text).strip()
     
     return text
-
 # ==================== CHARGEMENT DU MODÈLE ====================
 def load_model():
     """Charge le modèle entraîné sur Kaggle"""
